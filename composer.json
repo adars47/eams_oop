@@ -1,0 +1,19 @@
+{
+    "name": "barsha/eams_oop",
+    "description": "Oop project",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Barsha\\EamsOop\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "barsha",
+            "email": "barsha.malbul@msnu.edu"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
