@@ -5,3 +5,12 @@
 //include autoload.php for loading dependencies
 include_once ('vendor/autoload.php');
 
+## fetched a singleton implementation of application
+try {
+    $application = \App\Base\Application::getInstance();
+    $application::route();
+}
+catch (\App\Exceptions\HTTPMethodNotSupportedException $e)
+{
+
+}
