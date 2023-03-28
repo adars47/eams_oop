@@ -8,7 +8,8 @@ class HTTPMethodNotSupportedException extends \Exception
     public function __construct($message = "", $code = 0, Throwable $previous = null)
     {
         echo(json_encode([
-            "Error"=>true
+            "Error"=>true,
+            "name"=>"HTTP DOES NOT EXIST"
         ]));
         die;
     }

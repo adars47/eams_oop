@@ -2,11 +2,15 @@
 
 namespace App\Controller;
 
-class WelcomeController
+use App\Base\Controller;
+
+class WelcomeController extends Controller
 {
     public function welcome()
     {
-        echo("Hello world");
+        $name = "Barsha Malbul";
+        $age = 24;
+        self::render('welcome',["name"=>$name,"age"=>$age]);
     }
 
 }

@@ -7,7 +7,8 @@ class UrlDoesNotExistException extends \Exception
     public function __construct($message = "", $code = 0, Throwable $previous = null)
     {
         echo(json_encode([
-            "Error"=>true
+            "Error"=>true,
+            "name"=>"URL DOES NOT EXIST"
         ]));
         die;
     }
