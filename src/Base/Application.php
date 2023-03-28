@@ -15,6 +15,7 @@ class Application
     private static Application $app;
     public static String $base_path;
     public static Database $database_context;
+    private static QueryLogger $queryLogger;
     public function __construct()
     {
         //set application root context
@@ -25,6 +26,8 @@ class Application
 
         //create database object
         self::$database_context = new Database();
+        self::$queryLogger= new QueryLogger();
+        self::$database_context->subscribe(self::$queryLogger);
     }
 
     public static function getInstance() :Application

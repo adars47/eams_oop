@@ -9,6 +9,7 @@ class WelcomeController extends Controller
 {
     public function welcome()
     {
+        $this->post();
         $name = "Barsha Malbul";
         $age = 24;
         self::render('welcome',["name"=>$name,"age"=>$age]);
@@ -21,6 +22,7 @@ class WelcomeController extends Controller
             'email'=>"adars.nepal@gmail.com",
             'password'=>"Password@123"
         ];
+        $user->save();
 
     }
 

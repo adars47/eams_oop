@@ -17,17 +17,16 @@ class Model
 
         if(count($columns)!=count($values))
         {
-            //params and functions do not match
+            //params and functions do not match so throw exception
         }
 
         $query = "INSERT INTO ".$this->table_name." (".implode(",",$columns)." ) VALUES ("."'" . implode("','", $values) . "');";
-//        var_dump($query);die;
-        Application::$database_context->getConnection()->query($query);
+        Application::$database_context->execute($query);
     }
 
     public function fetchAll(){
         $query = "SELECT * from ".$this->table_name.";";
-        $result  = Application::$database_context->getConnection()->query($query);
+        $result  = Application::$database_context->execute($query);
         $response = [];
         while ($myrow = $result->fetch_array(MYSQLI_ASSOC))
         {
@@ -44,5 +43,4 @@ class Model
         return $response;
     }
 
-
-    }
+}

@@ -2,7 +2,9 @@
 
 namespace App\Base;
 
-class Observer
+interface Observer
 {
+
+    public function notify($args);
 
 }

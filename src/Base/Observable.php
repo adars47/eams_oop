@@ -2,7 +2,9 @@
 
 namespace App\Base;
 
-class Observable
+interface Observable
 {
+    public function subscribe($object);
 
+    public function unsubscribe($object);
 }

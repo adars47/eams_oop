@@ -5,7 +5,7 @@ namespace App\Base;
 //should this class be a singleton? i will decide later
 use App\Exceptions\DatabaseConnectionException;
 
-class Database
+class Database implements Observable
 {
 
     private static $connection;
@@ -27,6 +27,33 @@ class Database
     public function getConnection()
     {
         return self::$connection;
+    }
+
+    public function execute($query)
+    {
+        $this->notifyObservers($query);
+        return self::$connection->query($query);
+
+    }
+
+    private $observers = [];
+
+    public function subscribe($object)
+    {
+        $this->observers[spl_object_hash($object)]=$object;
+    }
+
+    public function unsubscribe($object)
+    {
+        unset($this->observers[spl_object_hash($object)]);
+    }
+
+    private function notifyObservers(string $query)
+    {
+        foreach($this->observers as $observer)
+        {
+            $observer->notify($query);
+        }
     }
 
 }
