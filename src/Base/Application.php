@@ -6,6 +6,7 @@ use App\Exceptions\ControllerDoesNotExistException;
 use App\Exceptions\HTTPMethodNotSupportedException;
 use App\Exceptions\MethodDoesNotExistException;
 use App\Exceptions\UrlDoesNotExistException;
+use Dotenv\Dotenv;
 
 class Application
 {
@@ -13,9 +14,17 @@ class Application
     # of application for each request
     private static Application $app;
     public static String $base_path;
+    public static Database $database_context;
     public function __construct()
     {
+        //set application root context
         self::$base_path = __DIR__;
+        //load .env
+        $dotenv = Dotenv::createImmutable(__DIR__."/../../");
+        $dotenv->load();
+
+        //create database object
+        self::$database_context = new Database();
     }
 
     public static function getInstance() :Application
@@ -46,5 +55,15 @@ class Application
             throw new MethodDoesNotExistException();
         }
         call_user_func( array( $instance, $func_to_exec['function']));
+    }
+
+    public static function exitApplication()
+    {
+        self::$database_context->getConnection()->close();
+    }
+
+    public function getDatabaseConnection(): Database
+    {
+        return self::$database_context;
     }
 }

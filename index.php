@@ -9,6 +9,7 @@ include_once ('vendor/autoload.php');
 try {
     $application = \App\Base\Application::getInstance();
     $application::route();
+    $application::exitApplication();
 }
 catch (\App\Exceptions\HTTPMethodNotSupportedException $e)
 {
