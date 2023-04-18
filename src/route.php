@@ -2,4 +2,5 @@
 
 use App\Base\Router;
 
-Router::get("/hello","App\\Controller\\WelcomeController","post");
+Router::get("/register","App\\Controller\\SignUpController","index");
+Router::post("/register","App\\Controller\\SignUpController", "register");
