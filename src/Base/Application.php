@@ -16,6 +16,7 @@ class Application
     public static String $base_path;
     public static Database $database_context;
     private static QueryLogger $queryLogger;
+    private static DatabaseDeleteMonitor $databaseDeleteMonitor;
     public function __construct()
     {
         //set application root context
@@ -24,10 +25,18 @@ class Application
         $dotenv = Dotenv::createImmutable(__DIR__."/../../");
         $dotenv->load();
 
+        if(strtolower($_ENV['lockdown_mode']??"false")=="true")
+        {
+            echo("LOCKDOWN MODE");die;
+        }
+
         //create database object
         self::$database_context = new Database();
         self::$queryLogger= new QueryLogger();
+        self::$databaseDeleteMonitor = new DatabaseDeleteMonitor();
         self::$database_context->subscribe(self::$queryLogger);
+        self::$database_context->subscribe(self::$databaseDeleteMonitor);
+
     }
 
     public static function getInstance() :Application
