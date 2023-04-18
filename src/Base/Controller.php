@@ -22,4 +22,12 @@ class Controller
         die;
     }
 
+    public static function getParams()
+    {
+        return [
+            "get"=>$_GET,
+            "post"=>$_POST
+        ];
+    }
+
 }
