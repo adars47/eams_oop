@@ -23,7 +23,7 @@ class SignUpController extends Controller
             'email'=>$data['email'],
             'password'=>$data['password']
         ];
-//        $user->save();
+        $user->save();
 
         $wes = new WelcomeEmailScheduler();
         $wes->schedule($user->properties['email']);

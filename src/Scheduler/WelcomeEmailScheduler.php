@@ -8,9 +8,7 @@ class WelcomeEmailScheduler extends Scheduler
     public function execute($payload)
     {
 
-        var_dump("FROM EXECUTE FUNCTION");
-        var_dump($payload);
-
+        var_dump("Email send to ".$payload);
         //pseudo code to send the email
     }
 }
