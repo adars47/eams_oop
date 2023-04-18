@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Base\Controller;
+use App\Model\User;
 
 class SignUpController extends Controller
 {
@@ -16,8 +17,12 @@ class SignUpController extends Controller
     public function register()
     {
         $data = self::getParams()['post'];
-        var_dump($data);die;
-        //register the user
+        $user = new User();
+        $user->properties=[
+            'email'=>$data['email'],
+            'password'=>$data['password']
+        ];
+        $user->save();
     }
 
 
