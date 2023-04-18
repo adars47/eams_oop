@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Base\Controller;
 use App\Model\User;
+use App\Scheduler\WelcomeEmailScheduler;
 
 class SignUpController extends Controller
 {
@@ -22,7 +23,11 @@ class SignUpController extends Controller
             'email'=>$data['email'],
             'password'=>$data['password']
         ];
-        $user->save();
+//        $user->save();
+
+        $wes = new WelcomeEmailScheduler();
+        $wes->schedule($user->properties['email']);
+
     }
 
 
