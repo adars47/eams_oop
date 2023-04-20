@@ -2,6 +2,8 @@
 
 namespace App\Base;
 
+use App\ApplicationStates\LockdownState;
+use App\ApplicationStates\NormalState;
 use App\Exceptions\ControllerDoesNotExistException;
 use App\Exceptions\HTTPMethodNotSupportedException;
 use App\Exceptions\MethodDoesNotExistException;
@@ -17,6 +19,8 @@ class Application
     public static Database $database_context;
     private static QueryLogger $queryLogger;
     private static DatabaseDeleteMonitor $databaseDeleteMonitor;
+    private static ApplicationState $appState;
+
     public function __construct()
     {
         //set application root context
@@ -24,12 +28,15 @@ class Application
         //load .env
         $dotenv = Dotenv::createImmutable(__DIR__."/../../");
         $dotenv->load();
-
         if(strtolower($_ENV['lockdown_mode']??"false")=="true")
         {
-            echo("LOCKDOWN MODE");die;
+            self::$appState = new LockdownState($this);
         }
-
+        else
+        {
+            self::$appState = new NormalState($this);
+        }
+        self::$appState->next();
         //create database object
         self::$database_context = new Database();
         self::$queryLogger= new QueryLogger();
@@ -77,5 +84,10 @@ class Application
     public function getDatabaseConnection(): Database
     {
         return self::$database_context;
+    }
+
+    public function setState(ApplicationState $applicationState)
+    {
+        self::$appState = $applicationState;
     }
 }
