@@ -7,7 +7,7 @@ class DatabaseDeleteMonitor implements Observer
 
     public function notify($args)
     {
-        echo("This was logged \n");
+//        echo("This was logged \n");
         if($args =="%DELETE%")
         {
             //send a slack notification

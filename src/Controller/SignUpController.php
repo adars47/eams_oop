@@ -11,7 +11,6 @@ class SignUpController extends Controller
 
     public function index()
     {
-
         self::render('register',[]);
         //render registration page
     }
@@ -34,7 +33,8 @@ class SignUpController extends Controller
                 "fullName"=>$user->properties['fullName'],
             )
         );
-
+        header("Location: " . "dashboard");
+        exit;
     }
 
 
