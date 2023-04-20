@@ -33,7 +33,8 @@ class SignUpController extends Controller
                 "fullName"=>$user->properties['fullName'],
             )
         );
-
+        header("Location: " . "dashboard");
+        exit;
     }
 
 

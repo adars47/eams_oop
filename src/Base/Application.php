@@ -40,7 +40,6 @@ class Application
     {
          if(!isset(self::$app))
          {
-
             self::$app = new Application();
          }
          return self::$app;
