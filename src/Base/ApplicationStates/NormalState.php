@@ -11,12 +11,11 @@ class NormalState extends ApplicationState
     public function next()
     {
         $this->databaseFacade = new DatabaseFacade();
-
         $this->application::route();
 
     }
 
-    public function getDatabaseContext(): bool
+    public function getDatabaseContext()
     {
         return $this->databaseFacade::getDatabaseContext();
     }

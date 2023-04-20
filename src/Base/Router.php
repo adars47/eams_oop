@@ -42,7 +42,6 @@ class Router
         $url = $_SERVER['REQUEST_URI'];
         $method = $_SERVER['REQUEST_METHOD'];
 
-
         if($method=="GET")
         {
             //search get array

@@ -11,6 +11,7 @@ class SignUpController extends Controller
 
     public function index()
     {
+
         self::render('register',[]);
         //render registration page
     }

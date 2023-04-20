@@ -16,7 +16,7 @@ class Application
     # of application for each request
     private static Application $app;
     public static String $base_path;
-    private static ApplicationState $appState;
+    public static ApplicationState $appState;
 
     public function __construct()
     {
@@ -34,7 +34,6 @@ class Application
         {
             self::$appState = new NormalState($this);
         }
-        self::$appState->next();
     }
 
     public static function getInstance() :Application
@@ -43,11 +42,6 @@ class Application
          {
 
             self::$app = new Application();
-             var_dump(self::$app);
-         }
-         else
-         {
-             var_dump(self::$app);
          }
          return self::$app;
     }
@@ -75,10 +69,10 @@ class Application
 
     public static function exitApplication(): void
     {
-        self::$appState->getDatabaseContext()->close();
+        self::$appState->getDatabaseContext()->getConnection()->close();
     }
 
-    public function getDatabaseConnection(): bool
+    public static function getDatabaseConnection()
     {
         return self::$appState->getDatabaseContext();
     }

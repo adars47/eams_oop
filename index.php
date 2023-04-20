@@ -8,6 +8,7 @@ include_once ('vendor/autoload.php');
 ## fetched a singleton implementation of application
 try {
     $application = \App\Base\Application::getInstance();
+    $application::$appState->next();
     $application::exitApplication();
 }
 catch (\App\Exceptions\HTTPMethodNotSupportedException $e)

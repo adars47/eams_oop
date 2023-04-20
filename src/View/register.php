@@ -10,10 +10,11 @@
 <body>
 
     <form action="/register" method="post">
-        <input type="text" name="email">
-        <input type="text" name="password">
-        <input type="text" name="confirm_password">
-        <input type="submit" value="send">
+        Email: <input type="text" name="email"> </br>
+        Full Name: <input type="text" name="fullName"></br>
+        Password: <input type="password" name="password"></br>
+        Password Again: <input type="password" name="confirm_password"></br>
+        <input type="submit" value="send"></br>
     </form>
 
 </body>

@@ -17,9 +17,9 @@ class DatabaseFacade
         self::$database_context->subscribe(self::$databaseDeleteMonitor);
     }
 
-    public static function getDatabaseContext(): bool
+    public static function getDatabaseContext(): Database
     {
-        return self::$database_context->getConnection();
+        return self::$database_context;
     }
 
 }
