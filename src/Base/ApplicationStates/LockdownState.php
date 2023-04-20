@@ -1,10 +1,10 @@
 <?php
 
-namespace App\ApplicationStates;
+namespace App\Base\ApplicationStates;
 
-use App\Base\Application;
+use App\Base\ApplicationState;
 
-class LockdownState extends \App\Base\ApplicationState
+class LockdownState extends ApplicationState
 {
     public function next()
     {

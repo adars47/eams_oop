@@ -7,8 +7,6 @@ class WelcomeEmailScheduler extends Scheduler
 {
     public function execute($payload)
     {
-
-        var_dump("Email send to ".$payload);
-        //pseudo code to send the email
+        mail($payload['email'],"Welcome to My E-com Site","Thank you,".$payload['fullName']." for signing up to my site!");
     }
 }

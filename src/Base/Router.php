@@ -34,11 +34,10 @@ class Router
      * @throws HTTPMethodNotSupportedException
      * @throws UrlDoesNotExistException
      */
-    public static function handle(): ?array
+    public static function handle($basePath): ?array
     {
-        $app = Application::getInstance();
         // load all routes
-        include_once($app::$base_path ."/../route.php");
+        include_once($basePath ."/../route.php");
 
         $url = $_SERVER['REQUEST_URI'];
         $method = $_SERVER['REQUEST_METHOD'];

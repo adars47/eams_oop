@@ -12,7 +12,8 @@ class User extends Model
     public $properties = [
         "id"=>null,
         "email"=>"",
-        "password"=>""
+        "password"=>"",
+        "fullName"=>""
         ];
 
 

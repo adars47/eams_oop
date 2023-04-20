@@ -17,7 +17,7 @@ class DatabaseFacade
         self::$database_context->subscribe(self::$databaseDeleteMonitor);
     }
 
-    public static function getDatabaseContext(): bool|\mysqli
+    public static function getDatabaseContext(): bool
     {
         return self::$database_context->getConnection();
     }

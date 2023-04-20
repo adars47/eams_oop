@@ -2,8 +2,8 @@
 
 namespace App\Base;
 
-use App\ApplicationStates\LockdownState;
-use App\ApplicationStates\NormalState;
+use App\Base\ApplicationStates\LockdownState;
+use App\Base\ApplicationStates\NormalState;
 use App\Exceptions\ControllerDoesNotExistException;
 use App\Exceptions\HTTPMethodNotSupportedException;
 use App\Exceptions\MethodDoesNotExistException;
@@ -25,6 +25,7 @@ class Application
         //load .env
         $dotenv = Dotenv::createImmutable(__DIR__."/../../");
         $dotenv->load();
+
         if(strtolower($_ENV['lockdown_mode']??"false")=="true")
         {
             self::$appState = new LockdownState($this);
@@ -40,7 +41,13 @@ class Application
     {
          if(!isset(self::$app))
          {
+
             self::$app = new Application();
+             var_dump(self::$app);
+         }
+         else
+         {
+             var_dump(self::$app);
          }
          return self::$app;
     }
@@ -52,7 +59,7 @@ class Application
      */
     public static function route()
     {
-        $func_to_exec = Router::handle();
+        $func_to_exec = Router::handle(self::$base_path);
         if(!class_exists($func_to_exec['controller']))
         {
             throw new ControllerDoesNotExistException();
@@ -71,7 +78,7 @@ class Application
         self::$appState->getDatabaseContext()->close();
     }
 
-    public function getDatabaseConnection(): bool|\mysqli
+    public function getDatabaseConnection(): bool
     {
         return self::$appState->getDatabaseContext();
     }
