@@ -16,9 +16,6 @@ class Application
     # of application for each request
     private static Application $app;
     public static String $base_path;
-    public static Database $database_context;
-    private static QueryLogger $queryLogger;
-    private static DatabaseDeleteMonitor $databaseDeleteMonitor;
     private static ApplicationState $appState;
 
     public function __construct()
@@ -37,13 +34,6 @@ class Application
             self::$appState = new NormalState($this);
         }
         self::$appState->next();
-        //create database object
-        self::$database_context = new Database();
-        self::$queryLogger= new QueryLogger();
-        self::$databaseDeleteMonitor = new DatabaseDeleteMonitor();
-        self::$database_context->subscribe(self::$queryLogger);
-        self::$database_context->subscribe(self::$databaseDeleteMonitor);
-
     }
 
     public static function getInstance() :Application
@@ -76,17 +66,17 @@ class Application
         call_user_func( array( $instance, $func_to_exec['function']));
     }
 
-    public static function exitApplication()
+    public static function exitApplication(): void
     {
-        self::$database_context->getConnection()->close();
+        self::$appState->getDatabaseContext()->close();
     }
 
-    public function getDatabaseConnection(): Database
+    public function getDatabaseConnection(): bool|\mysqli
     {
-        return self::$database_context;
+        return self::$appState->getDatabaseContext();
     }
 
-    public function setState(ApplicationState $applicationState)
+    public function setState(ApplicationState $applicationState): void
     {
         self::$appState = $applicationState;
     }
