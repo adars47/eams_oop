@@ -20,7 +20,7 @@ class Executor{
             {
                 if($job!="")
                 {
-                    call_user_func(array($tmp_class,"execute"),json_decode($job));
+                    call_user_func(array($tmp_class,"execute"),json_decode($job,true));
                 }
             }
             unlink($dir.$file);
