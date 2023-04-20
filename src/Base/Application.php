@@ -2,6 +2,8 @@
 
 namespace App\Base;
 
+use App\Base\ApplicationStates\LockdownState;
+use App\Base\ApplicationStates\NormalState;
 use App\Exceptions\ControllerDoesNotExistException;
 use App\Exceptions\HTTPMethodNotSupportedException;
 use App\Exceptions\MethodDoesNotExistException;
@@ -14,9 +16,8 @@ class Application
     # of application for each request
     private static Application $app;
     public static String $base_path;
-    public static Database $database_context;
-    private static QueryLogger $queryLogger;
-    private static DatabaseDeleteMonitor $databaseDeleteMonitor;
+    public static ApplicationState $appState;
+
     public function __construct()
     {
         //set application root context
@@ -27,22 +28,19 @@ class Application
 
         if(strtolower($_ENV['lockdown_mode']??"false")=="true")
         {
-            echo("LOCKDOWN MODE");die;
+            self::$appState = new LockdownState($this);
         }
-
-        //create database object
-        self::$database_context = new Database();
-        self::$queryLogger= new QueryLogger();
-        self::$databaseDeleteMonitor = new DatabaseDeleteMonitor();
-        self::$database_context->subscribe(self::$queryLogger);
-        self::$database_context->subscribe(self::$databaseDeleteMonitor);
-
+        else
+        {
+            self::$appState = new NormalState($this);
+        }
     }
 
     public static function getInstance() :Application
     {
          if(!isset(self::$app))
          {
+
             self::$app = new Application();
          }
          return self::$app;
@@ -55,7 +53,7 @@ class Application
      */
     public static function route()
     {
-        $func_to_exec = Router::handle();
+        $func_to_exec = Router::handle(self::$base_path);
         if(!class_exists($func_to_exec['controller']))
         {
             throw new ControllerDoesNotExistException();
@@ -69,13 +67,18 @@ class Application
         call_user_func( array( $instance, $func_to_exec['function']));
     }
 
-    public static function exitApplication()
+    public static function exitApplication(): void
     {
-        self::$database_context->getConnection()->close();
+        self::$appState->getDatabaseContext()->getConnection()->close();
     }
 
-    public function getDatabaseConnection(): Database
+    public static function getDatabaseConnection()
     {
-        return self::$database_context;
+        return self::$appState->getDatabaseContext();
+    }
+
+    public function setState(ApplicationState $applicationState): void
+    {
+        self::$appState = $applicationState;
     }
 }

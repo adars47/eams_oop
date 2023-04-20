@@ -21,12 +21,12 @@ class Model
         }
 
         $query = "INSERT INTO ".$this->table_name." (".implode(",",$columns)." ) VALUES ("."'" . implode("','", $values) . "');";
-        Application::$database_context->execute($query);
+        Application::getDatabaseConnection()->execute($query);
     }
 
     public function fetchAll(){
         $query = "SELECT * from ".$this->table_name.";";
-        $result  = Application::$database_context->execute($query);
+        $result  = Application::getDatabaseConnection()->execute($query);
         $response = [];
         while ($myrow = $result->fetch_array(MYSQLI_ASSOC))
         {

@@ -21,12 +21,18 @@ class SignUpController extends Controller
         $user = new User();
         $user->properties=[
             'email'=>$data['email'],
-            'password'=>$data['password']
+            'password'=>$data['password'],
+            'fullName'=>$data['fullName']
         ];
         $user->save();
 
         $wes = new WelcomeEmailScheduler();
-        $wes->schedule($user->properties['email']);
+        $wes->schedule(
+            array(
+                "email"=>$user->properties['email'],
+                "fullName"=>$user->properties['fullName'],
+            )
+        );
 
     }
 
