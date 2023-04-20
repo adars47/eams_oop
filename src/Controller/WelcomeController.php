@@ -9,7 +9,7 @@ class WelcomeController extends Controller
 {
     public function welcome()
     {
-        $name = "Adarsha Nepal";
+        $name = "Barsha Malbul";
         $age = 20;
         self::render('welcome',["name"=>$name,"age"=>$age]);
     }
@@ -18,7 +18,7 @@ class WelcomeController extends Controller
     {
         $user = new User();
         $user->properties=[
-            'email'=>"aaa.com",
+            'email'=>"barsha.malbul@gmail.com",
             'password'=>"Password@1234"
         ];
         $user->save();
