@@ -4,6 +4,12 @@ namespace App\Base;
 
 class Model
 {
+
+    public function query($sql)
+    {
+        return Application::getDatabaseConnection()->execute($sql);
+    }
+
     public function save(){
         if(empty($this->properties))
         {

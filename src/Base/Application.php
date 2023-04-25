@@ -26,6 +26,9 @@ class Application
         $dotenv = Dotenv::createImmutable(__DIR__."/../../");
         $dotenv->load();
 
+        //start session
+        session_start();
+
         if(strtolower($_ENV['lockdown_mode']??"false")=="true")
         {
             self::$appState = new LockdownState($this);
