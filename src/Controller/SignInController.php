@@ -5,7 +5,8 @@ namespace App\Controller;
 use App\Base\Controller;
 use App\Exceptions\InvalidCredentialsException;
 use App\Model\User;
-use http\Exception\InvalidArgumentException;
+use App\Notification\BaseNotificationHandler;
+use App\Notification\LoggedInNotifier;
 
 class SignInController extends Controller
 {
@@ -31,10 +32,18 @@ class SignInController extends Controller
             $user = new User();
             $user->properties = $response;
             //logged in
+            $notification_Visitor = new BaseNotificationHandler($user);
+            $notification_Visitor->accept(new LoggedInNotifier());
             //redirect to dashboard
             $_SESSION['user'] = $user;
             header("Location: /dashboard");die;
         }
         throw new InvalidCredentialsException();
+    }
+
+    public function logout()
+    {
+        unset($_SESSION['user']);
+        header("Location: /login");
     }
 }
