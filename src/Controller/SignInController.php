@@ -36,6 +36,11 @@ class SignInController extends Controller
             $notification_Visitor->accept(new LoggedInNotifier());
             //redirect to dashboard
             $_SESSION['user'] = $user;
+            $_SESSION['success'][] =[
+                "title"=> "dashboard",
+                "message" => "Welcome to the E-commerce site."
+            ];
+            session_write_close();
             header("Location: /dashboard");die;
         }
         throw new InvalidCredentialsException();

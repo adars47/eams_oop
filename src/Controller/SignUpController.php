@@ -25,6 +25,7 @@ class SignUpController extends Controller
             'fullName'=>$data['fullName']
         ];
         $user->save();
+        $_SESSION['user'] = $user;
 
         $wes = new WelcomeEmailScheduler();
         $wes->schedule(
@@ -33,7 +34,12 @@ class SignUpController extends Controller
                 "fullName"=>$user->properties['fullName'],
             )
         );
+        $_SESSION['success'][] =[
+            "title"=> "dashboard",
+            "message" => "Welcome to the E-commerce site."
+        ];
         header("Location: " . "dashboard");
+
         exit;
     }
 
