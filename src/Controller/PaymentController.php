@@ -2,6 +2,10 @@
 
 namespace App\Controller;
 
+use App\Discount\BaseDiscount;
+use App\Discount\Discount;
+use App\Discount\LoyaltyDiscount;
+use App\Discount\MarchMadnessDiscount;
 use App\Exceptions\PaymentMethodDoesNotExistException;
 use App\Model\PaymentDetails;
 use App\Payment\BankCardPaymentStrategy;
@@ -34,6 +38,9 @@ class PaymentController extends \App\Base\Controller
         $params = self::getParams()['post'];
         $method = $params['method'];
         $amount = $params['amount'];
+
+        $amount = $this->calculateDiscount($amount);
+
         $paymentService = new PaymentService();
 
         $paymentStrategy = null;
@@ -56,5 +63,17 @@ class PaymentController extends \App\Base\Controller
 
         $paymentService->setPaymentStrategy($paymentStrategy);
         $paymentService->pay($_SESSION['user'],$amount);
+    }
+
+    private function calculateDiscount($amount)
+    {
+        $discount = new BaseDiscount();
+        $discount = new MarchMadnessDiscount($discount);
+        $discount = new LoyaltyDiscount($discount);
+        $_SESSION['success'][]=[
+            "title"=>"Discount Applied",
+            "message"=>$discount->description()
+        ];
+        return $amount-$discount->amount();
     }
 }

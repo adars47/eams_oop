@@ -21,4 +21,14 @@
             </ul>
         </div>
     </div>
+    <?php
+
+    foreach($_SESSION['error'] as $err)
+    {
+        echo($_SESSION['error']);
+    }
+
+    $_SESSION['success'];
+
+    ?>
 </nav>
