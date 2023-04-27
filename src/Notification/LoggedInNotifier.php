@@ -8,7 +8,7 @@ class LoggedInNotifier implements NotifierVisitor
     {
         $_SESSION['success'][]=[
             "title"=>"Notified user by sms",
-            "message"=>"Notified user about account logged in."
+            "message"=>"Notified user by sms."
         ];
     }
 
@@ -21,7 +21,7 @@ class LoggedInNotifier implements NotifierVisitor
     {
         $_SESSION['success'][]=[
             "title"=>"Push message successfully sent",
-            "message"=>"Notified user about account logged in."
+            "message"=>"Push message successfully sent."
         ];
     }
 
