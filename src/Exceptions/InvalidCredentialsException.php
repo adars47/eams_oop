@@ -12,10 +12,15 @@ class InvalidCredentialsException extends \Exception
             "message"=>"Please re-enter your credentials"
         ];
         //redirect to /login
-        echo(json_encode([
-            "Error"=>true,
-            "name"=>"Invalid credentials"
-        ]));
-        die;
+        $_SESSION['error'][] =[
+            "title"=> "Login Invalid",
+            "message" => "InValid Credentials"
+        ];
+        header("Location: /login");die;
+//        echo(json_encode([
+//            "Error"=>true,
+//            "name"=>"Invalid credentials"
+//        ]));
+
     }
 }
