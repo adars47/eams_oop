@@ -26,7 +26,7 @@ class PaymentController extends \App\Base\Controller
 
     public function savePaymentInformation()
     {
-        $uid = $_SESSION['user']['id'];
+        $uid = $_SESSION['user']->properties['id'];
         $payments = self::getParams()['post'];
         $json = json_encode($payments);
         $paymentDetailsObj = new PaymentDetails();
@@ -36,10 +36,12 @@ class PaymentController extends \App\Base\Controller
             "method"=>strtolower($payments['method'])
         ];
         $paymentDetailsObj->save();
-        echo(json_encode([
-            "success"=>true,
-            "message"=>"Successfully saved payment method"
-        ]));die;
+        $_SESSION['success'][] =[
+            "title"=> "dashboard",
+            "message" => "Successfully saved payment method"
+        ];
+        session_write_close();
+        header("Location: /dashboard");die;
     }
 
     public function pay()

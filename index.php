@@ -8,6 +8,7 @@ include_once ('vendor/autoload.php');
 ## fetched a singleton implementation of application
 try {
     $application = \App\Base\Application::getInstance();
+//    var_dump($application);die;
     $application::$appState->next();
     $application::exitApplication();
 }

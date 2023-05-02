@@ -4,7 +4,7 @@ namespace App\Discount;
 
 class BaseDiscount implements Discount
 {
-    public $base_discount=0.0;
+    public $base_discount = 0.0;
 
     public function amount()
     {
