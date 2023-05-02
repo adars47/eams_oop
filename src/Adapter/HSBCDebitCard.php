@@ -9,7 +9,10 @@ class HSBCDebitCard implements HSBCPay
 
     function HsbcBankPay($payment_details, $amount, $merchant_details)
     {
-        //make api call to bank
+        $_SESSION['success'][]=[
+            "title"=>"API Call made to hsbc",
+            "message"=>"Send payment information to HSBC."
+        ];
     }
 
     function formatRequest(PaymentDetails $paymentDetails, $amount)

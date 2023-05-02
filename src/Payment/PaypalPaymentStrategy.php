@@ -1,6 +1,8 @@
 <?php
 namespace App\Payment;
 
+use App\Adapter\HSBCToUSBankAdapter;
+use App\Adapter\USBankDebitCard;
 use App\Exceptions\PaymentMethodDoesNotExistException;
 use App\Model\PaymentDetails;
 

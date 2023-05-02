@@ -9,8 +9,11 @@ class USBankDebitCard implements UsBank
 
     function UsBankPay($payment_details, $amount, $merchant_details)
     {
-        // TODO: Implement UsBankPay() method.
-    }
+        $_SESSION['success'][]=[
+            "title"=>"API Call made to hsbc",
+            "message"=>"Send payment information to HSBC."
+        ];
+     }
 
     function formatRequest(PaymentDetails $paymentDetails, $amount,$apiKey)
     {

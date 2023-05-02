@@ -29,6 +29,5 @@ class BookingController extends Controller
             "title"=>"Discount Applied",
             "message"=>"Discount Applied </br> ".implode(",",array_keys($discount->description()))
         ];
-        return $amount-$discount->amount();
     }
 }

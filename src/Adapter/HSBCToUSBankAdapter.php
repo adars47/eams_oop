@@ -20,6 +20,6 @@ class HSBCToUSBankAdapter implements HSBCPay
 
     function formatRequest(PaymentDetails $paymentDetails, $amount)
     {
-        $this->usBank->formatRequest($paymentDetails,$amount,$_ENV['usBankApiKey']);
+        $this->HsbcBankPay(json_decode($paymentDetails['HSBCBankApiKey'],true),$amount,$_ENV['payment_details']);
     }
 }
