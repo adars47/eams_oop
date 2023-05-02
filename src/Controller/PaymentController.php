@@ -14,9 +14,14 @@ use App\Service\PaymentService;
 
 class PaymentController extends \App\Base\Controller
 {
-    public function paymentMethod()
+    public function cardDetail()
     {
-        self::render('paymentMethodForm',[]);
+        self::render('cardDetailForm',[]);
+    }
+
+    public function paypalDetail()
+    {
+        self::render('paypaldetailForm',[]);
     }
 
     public function proceedToPay()

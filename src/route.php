@@ -12,7 +12,8 @@ Router::get("/logout","App\\Controller\\SignInController", "logout");
 
 Router::post("/payment","App\Controller\PaymentController","savePaymentInformation");
 Router::post("/pay","App\Controller\PaymentController","pay");
-Router::get("/paymentMethod","App\Controller\PaymentController","paymentMethod");
+Router::get("/add/cardDetail","App\Controller\PaymentController","cardDetail");
+Router::get("/add/paypalDetail","App\Controller\PaymentController","paypalDetail");
 Router::get("/proceedToPay","App\Controller\PaymentController","proceedToPay");
 
 Router::get("/dashboard","App\\Controller\\DashboardController", "index");

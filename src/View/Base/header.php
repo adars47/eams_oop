@@ -201,11 +201,12 @@
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <?php
-                if(!empty($_SESSION['user'])){
-                    echo ('<li class="active"><a href="/dashboard">Home</a></li>');
-                    echo ('<li><a href="/paymentMethod">Payment Method</a></li>');
-                    echo ('<li><a href="/proceedToPay">Proceed To Pay</a></li>');
-                }?>
+                if(!empty($_SESSION['user'])){?>
+                    <li class="active"><a href="/dashboard">Home</a></li>
+                    <li><a href="/add/cardDetail">Add Card Details</a></li>
+                    <li><a href="/add/paypalDetail">Add Paypal Details</a></li>
+                    <li><a href="/proceedToPay">Proceed To Pay</a></li>
+               <?php }?>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <?php
