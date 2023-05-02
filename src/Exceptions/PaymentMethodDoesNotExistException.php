@@ -12,6 +12,7 @@ class PaymentMethodDoesNotExistException extends \Exception
             "title"=>"Invalid payment",
             "message"=>"Please re-enter details of your payment method"
         ];
+
         header("Location: /dashboard");die;
     }
 }

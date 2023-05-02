@@ -2,13 +2,22 @@
 
 namespace App\Base;
 
-//should this class be a singleton? i will decide later
 use App\Exceptions\DatabaseConnectionException;
 
 class Database implements Observable
 {
+    public static Database $database;
 
     private static $connection;
+
+    public static function getInstance()
+    {
+        if(!isset($database))
+        {
+            return new Database();
+        }
+        return self::$database;
+    }
 
     /**
      * @throws DatabaseConnectionException

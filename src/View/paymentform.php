@@ -3,14 +3,30 @@
         <?php require "Base/header.php"?>
     </head>
     <body>
+    <?php
+        $to_pay = $args['pay_data'];
+        $discount = $args['discount_data'];
+    ?>
         <p></p>
         <div class="row">
             <div class="col-25">
                 <div class="container">
-                    <h4>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b>1</b></span></h4>
-                    <p><a href="#"><?= $args['name'] ?></a> <span class="price"><?= $args['charge'] ?></span></p>
+                    <h4><b>Cart</b> <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b>1</b></span></h4>
+                    <p><?= $to_pay['name'] ?> <span class="price">$<?= $to_pay['charge'] ?></span></p>
+
+                    <h4><b>Discount</b></h4>
+                    <ul>
+                        <?php
+                        foreach($discount as $key=>$value)
+                        { ?>
+                            <li> <?= $key ?>  <span class="price">$<?= $value ?></span> </li>
+                        <?php
+                            $to_pay['charge'] = $to_pay['charge']-$value;
+                        }
+                        ?>
+                    </ul>
                     <hr>
-                    <p>Total <span class="price" style="color:black"><b><?= $args['charge'] ?></b></span></p>
+                    <p>Total <span class="price" style="color:black"><b><?= $to_pay['charge'] ?></b></span></p>
                 </div>
             </div>
             <div class="col-75">
@@ -26,7 +42,7 @@
                                     <option value="Paypal">Paypal</option>
                                 </select>
                                 <label for="amount"><i class="fa fa-address-card-o"></i> Amount </label>
-                                <input type="text" id="amount" name="amount" placeholder="Amount" value="<?= $args['charge']?>" readonly>
+                                <input type="text" id="amount" name="amount" placeholder="Amount" value="<?= $to_pay['charge']?>" readonly>
                                </div>
                         </div>
                         <input type="submit" value="Pay" class="btn">

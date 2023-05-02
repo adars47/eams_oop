@@ -21,6 +21,8 @@ class MarchMadnessDiscount extends DiscountDecorator
 
     public function description()
     {
-        return $this->discount->description() . "March Madness discount";
+        $desc = $this->discount->description();
+        $desc['March Madness Discount']= $this->discount_amount;
+        return $desc;
     }
 }

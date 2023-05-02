@@ -4,7 +4,7 @@ namespace App\Product\ConcreteProducts;
 class USATour
 {
 
-    private $name ="";
+    public $name ="";
 
     public function __construct($charge, $length, $physical_difficulty, $name)
     {

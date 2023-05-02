@@ -13,6 +13,8 @@ class BaseDiscount implements Discount
 
     public function description()
     {
-        return "Base discount";
+        return [
+            "Base Discount"=>$this->base_discount
+        ];
     }
 }

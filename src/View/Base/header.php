@@ -205,7 +205,6 @@
                     <li class="active"><a href="/dashboard">Home</a></li>
                     <li><a href="/add/cardDetail">Add Card Details</a></li>
                     <li><a href="/add/paypalDetail">Add Paypal Details</a></li>
-                    <li><a href="/proceedToPay">Proceed To Pay</a></li>
                <?php }?>
             </ul>
             <ul class="nav navbar-nav navbar-right">

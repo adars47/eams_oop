@@ -21,6 +21,8 @@ class LoyaltyDiscount extends DiscountDecorator
 
     public function description()
     {
-        return $this->discount->description() . " Loyalty discount";
+        $desc = $this->discount->description();
+        $desc['Loyalty Discount']= $this->discount_amount;
+        return $desc;
     }
 }

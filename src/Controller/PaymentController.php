@@ -2,11 +2,6 @@
 
 namespace App\Controller;
 
-use App\Discount\BaseDiscount;
-use App\Discount\Discount;
-use App\Discount\LoyaltyDiscount;
-use App\Discount\MarchMadnessDiscount;
-use App\Exceptions\PaymentMethodDoesNotExistException;
 use App\Model\PaymentDetails;
 use App\Payment\BankCardPaymentStrategy;
 use App\Payment\PaypalPaymentStrategy;
@@ -35,8 +30,10 @@ class PaymentController extends \App\Base\Controller
             session_write_close();
             header("Location: /dashboard");die;
         }
-        $data = $_SESSION['pay_data'];
-        unset($_SESSION['pay_data']);
+        $data = [
+            'pay_data'=>$_SESSION['pay_data'],
+            'discount_data'=>$_SESSION['discount']
+        ];
         self::render('paymentForm',$data);
     }
 
@@ -66,7 +63,7 @@ class PaymentController extends \App\Base\Controller
         $method = $params['method'];
         $amount = $params['amount'];
 
-        $amount = $this->calculateDiscount($amount);
+//        $amount = $this->calculateDiscount($amount);
 
         $paymentService = new PaymentService();
 
@@ -84,8 +81,13 @@ class PaymentController extends \App\Base\Controller
 
         if($paymentStrategy==null)
         {
-            //throw exception
-             throw new PaymentMethodDoesNotExistException();
+            $_SESSION['error'][] =[
+                "title"=> "booking error",
+                "message" => "Please select a valid payment method."
+            ];
+            header("Location: /proceedToPay");
+            die;
+
         }
 
         $paymentService->setPaymentStrategy($paymentStrategy);
@@ -94,18 +96,9 @@ class PaymentController extends \App\Base\Controller
             "title"=> "booked",
             "message" => "Successfully booked trip."
         ];
+        unset($_SESSION['pay_data']);
+        unset($_SESSION['discount']);
         header("Location: /dashboard");
     }
 
-    private function calculateDiscount($amount)
-    {
-        $discount = new BaseDiscount();
-        $discount = new MarchMadnessDiscount($discount);
-        $discount = new LoyaltyDiscount($discount);
-        $_SESSION['success'][]=[
-            "title"=>"Discount Applied",
-            "message"=>$discount->description()
-        ];
-        return $amount-$discount->amount();
-    }
 }

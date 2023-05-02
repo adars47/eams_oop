@@ -10,7 +10,7 @@ class DatabaseFacade
 
     public function __construct()
     {
-        self::$database_context = new Database();
+        self::$database_context = Database::getInstance();
         self::$queryLogger= new QueryLogger();
         self::$databaseDeleteMonitor = new DatabaseDeleteMonitor();
         self::$database_context->subscribe(self::$queryLogger);
