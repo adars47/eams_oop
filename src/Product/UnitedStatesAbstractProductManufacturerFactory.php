@@ -10,12 +10,14 @@ class UnitedStatesAbstractProductManufacturerFactory extends AbstractProductFact
 
     public function createTours($charge,$length,$difficulty,$name)
     {
-        return new USATour($charge,$length,$difficulty,$name);
+        $tourType = ProductType::get('tour');
+        return new USATour($charge,$length,$difficulty,$name,$tourType);
 
     }
 
     public function createSafari($charge,$length,$difficulty,$name)
     {
-        return new USATour($charge,$length,$difficulty,$name);
+        $tourType = ProductType::get('safari');
+        return new USATour($charge,$length,$difficulty,$name,$tourType);
     }
 }

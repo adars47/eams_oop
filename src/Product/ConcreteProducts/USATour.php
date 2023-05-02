@@ -5,13 +5,15 @@ class USATour
 {
 
     public $name ="";
+    private $tourType;
 
-    public function __construct($charge, $length, $physical_difficulty, $name)
+    public function __construct($charge, $length, $physical_difficulty, $name,$tourType)
     {
         $this->charge = $charge;
         $this->length = $length;
         $this->physical_difficulty = $physical_difficulty;
         $this->name = $name;
+        $this->tourType = $tourType;
     }
 
     public $required_documents = [

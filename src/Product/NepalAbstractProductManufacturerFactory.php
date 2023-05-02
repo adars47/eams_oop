@@ -8,13 +8,13 @@ class NepalAbstractProductManufacturerFactory extends AbstractProductFactory
 {
     public function createTours($charge,$length,$difficulty,$name)
     {
-        $tourType="TOUR";
+        $tourType = ProductType::get('tour');
         return new NepalTour($charge,$length,$difficulty,$name,$tourType);
     }
 
     public function createSafari($charge,$length,$difficulty,$name)
     {
-        $tourType="Safari";
+        $tourType = ProductType::get('safari');
         return new NepalTour($charge,$length,$difficulty,$name,$tourType);
     }
 }
