@@ -15,4 +15,6 @@ Router::post("/pay","App\Controller\PaymentController","pay");
 Router::get("/paymentMethod","App\Controller\PaymentController","paymentMethod");
 Router::get("/proceedToPay","App\Controller\PaymentController","proceedToPay");
 
+Router::get("/book","App\Controller\BookingController","book");
 Router::get("/dashboard","App\\Controller\\DashboardController", "index");
+Router::get("/","App\\Controller\\DashboardController", "index");

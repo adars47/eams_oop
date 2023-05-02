@@ -20,8 +20,8 @@
                         <li> cost: <?= $item->charge ?> </li>
                         <li> duration: <?= $item->length ?> days </li>
                         <li> difficulty: <?= $item->physical_difficulty ?> </li>
-                        <a href="/book"><button>Book</button></a>
-                    </ul>
+                        <a href="/book?data=<?= urlencode(json_encode($item))?>"><button>Book</button></a>
+                </ul>
                 </p>
             <?php
             }
@@ -38,7 +38,7 @@
                 <li> cost: <?= $item->charge ?> </li>
                 <li> duration: <?= $item->length ?> days </li>
                 <li> difficulty: <?= $item->physical_difficulty ?> </li>
-                <a href="/book"><button>Book</button></a>
+                <a href="/book?data=<?= urlencode(json_encode($item))?>"><button>Book</button></a>
         </ul>
             </p>
          <?php
@@ -59,7 +59,7 @@
                 <li> cost: <?= $item->charge ?> </li>
                 <li> duration: <?= $item->length ?> days </li>
                 <li> difficulty: <?= $item->physical_difficulty ?> </li>
-                <a href="/book"><button>Book</button></a>
+                <a href="/book?data=<?= urlencode(json_encode($item))?>"><button>Book</button></a>
             </ul>
             </p>
             <?php
@@ -77,7 +77,7 @@
                     <li> cost: <?= $item->charge ?> </li>
                     <li> duration: <?= $item->length ?> days </li>
                     <li> difficulty: <?= $item->physical_difficulty ?> </li>
-                    <a href="/book"><button>Book</button></a>
+                    <a href="/book?data=<?= urlencode(json_encode($item))?>"><button>Book</button></a>
                 </ul>
             </p>
             <?php

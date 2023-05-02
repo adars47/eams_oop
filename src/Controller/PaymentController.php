@@ -21,7 +21,18 @@ class PaymentController extends \App\Base\Controller
 
     public function proceedToPay()
     {
-        self::render('paymentForm',[]);
+        if(!isset($_SESSION['pay_data']))
+        {
+            $_SESSION['error'][] =[
+                "title"=> "dashboard",
+                "message" => "Something went wrong"
+            ];
+            session_write_close();
+            header("Location: /dashboard");die;
+        }
+        $data = $_SESSION['pay_data'];
+        unset($_SESSION['pay_data']);
+        self::render('paymentForm',$data);
     }
 
     public function savePaymentInformation()
@@ -74,6 +85,11 @@ class PaymentController extends \App\Base\Controller
 
         $paymentService->setPaymentStrategy($paymentStrategy);
         $paymentService->pay($_SESSION['user'],$amount);
+        $_SESSION['success'][] =[
+            "title"=> "booked",
+            "message" => "Successfully booked trip."
+        ];
+        header("Location: /dashboard");
     }
 
     private function calculateDiscount($amount)

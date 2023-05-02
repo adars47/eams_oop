@@ -39,7 +39,8 @@ class Router
         // load all routes
         include_once($basePath ."/../route.php");
 
-        $url = $_SERVER['REQUEST_URI'];
+        $uri_parts = explode('?', $_SERVER['REQUEST_URI'], 2);
+        $url = $uri_parts[0];
         $method = $_SERVER['REQUEST_METHOD'];
 
         if($method=="GET")

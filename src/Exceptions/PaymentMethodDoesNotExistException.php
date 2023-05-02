@@ -12,10 +12,6 @@ class PaymentMethodDoesNotExistException extends \Exception
             "title"=>"Invalid payment",
             "message"=>"Please re-enter details of your payment method"
         ];
-//        echo(json_encode([
-//            "Error"=>true,
-//            "name"=>"Invalid payment method"
-//        ]));
-        die;
+        header("Location: /dashboard");die;
     }
 }

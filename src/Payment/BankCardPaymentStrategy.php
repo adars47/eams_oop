@@ -10,8 +10,10 @@ class BankCardPaymentStrategy implements PaymentStrategyInterface
     public function pay(\App\Model\User $user,$amount)
     {
         $this->collectPaymentDetails($user);
-        var_dump("PAID ".$amount." USING BANK CARD");die;
-        // TODO: Implement pay() method.
+        $_SESSION['success'][] =[
+            "title"=> "booked",
+            "message" => "Paid ".$amount." Using Bank Card"
+        ];
     }
 
     public function validatePaymentDetails()
