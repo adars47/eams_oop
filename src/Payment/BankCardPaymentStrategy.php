@@ -1,6 +1,8 @@
 <?php
 namespace App\Payment;
 
+use App\Adapter\HSBCToUSBankAdapter;
+use App\Adapter\USBankDebitCard;
 use App\Exceptions\PaymentMethodDoesNotExistException;
 use App\Model\PaymentDetails;
 
@@ -9,7 +11,9 @@ class BankCardPaymentStrategy implements PaymentStrategyInterface
 
     public function pay(\App\Model\User $user,$amount)
     {
-        $this->collectPaymentDetails($user);
+        $payment_deets = $this->collectPaymentDetails($user);
+        $payobj = new HSBCToUSBankAdapter(new USBankDebitCard());
+        $payobj->formatRequest($payment_deets,$amount);
         $_SESSION['success'][] =[
             "title"=> "booked",
             "message" => "Paid ".$amount." Using Bank Card"
@@ -33,5 +37,6 @@ class BankCardPaymentStrategy implements PaymentStrategyInterface
         }
 
         $payment_details->properties = $result;
+        return $payment_details;
     }
 }

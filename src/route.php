@@ -19,3 +19,6 @@ Router::get("/proceedToPay","App\Controller\PaymentController","proceedToPay");
 Router::get("/book","App\Controller\BookingController","book");
 Router::get("/dashboard","App\\Controller\\DashboardController", "index");
 Router::get("/","App\\Controller\\DashboardController", "index");
+
+
+Router::get("/emulatedBankAPI","App\Controller\ExternalController","bankController");
